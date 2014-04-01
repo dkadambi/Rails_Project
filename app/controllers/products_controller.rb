@@ -13,9 +13,17 @@ class ProductsController < ApplicationController
 
   #this loads the app/views/products/new.html.erb
   def new
+    @product = Product.new
   end
 
   def create
+    @product = Product.new(product_params)
+    if @product.save
+      redirect_to action: :index
+    else
+      render :new
+    end
+    
   end
 
   def edit
@@ -26,4 +34,9 @@ class ProductsController < ApplicationController
 
   def destroy
   end
+  
+  private
+    def product_params
+      params.require(:product).permit(:name, :price, :stock_quantity, :image_name)
+    end
 end
