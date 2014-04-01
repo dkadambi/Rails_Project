@@ -16,6 +16,7 @@ class ProductsController < ApplicationController
     @product = Product.new
   end
 
+  # No views are rendered
   def create
     @product = Product.new(product_params)
     if @product.save
@@ -23,16 +24,28 @@ class ProductsController < ApplicationController
     else
       render :new
     end
-    
   end
 
   def edit
+    @product = Product.find(params[:id])
   end
 
+  #we either redirect or render the edit view 
   def update
+    @product = Product.find(params[:id])
+    if @product.update_attributes(product_params)
+      redirect_to @product
+    else
+      render :edit
+    end
+    
   end
 
+  #destroy will always redirect to the root after deletion
   def destroy
+    @product = Product.find(params[:id])
+    @product.destroy
+    redirect_to root_path
   end
   
   private

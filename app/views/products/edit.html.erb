@@ -1,2 +1,34 @@
-<h1>Products#edit</h1>
-<p>Find me in app/views/products/edit.html.erb</p>
+<h1>Edit Product</h1>
+<%= form_for @product do |f| %>
+  <% if @product.errors.any?%>
+    <p>There was <%= pluralize @product.errors.count, 'error' %> validation errors that prevented your product form being valid</p>
+    <ul>
+      <% @product.errors.full_messages.each do |msg| %>
+        <li><%= msg%></li>
+      <% end %>
+    </ul>
+  <% end %>
+  <div>
+    <%= f.label :name %>
+    <br>
+    <%= f.text_field :name %>
+  </div>
+  <div>
+    <%= f.label :price %>
+    <br>
+    <%= f.text_field :price %>
+  </div>
+  <div>
+    <%= f.label :stock_quantity %>
+    <br>
+    <%= f.text_field :stock_quantity %>
+  </div>
+   <div>
+    <%= f.label :image_name %>
+    <br>
+    <%= f.text_field :image_name %>
+  </div>
+  <div>
+    <%= f.submit "Update Product" %>
+  </div>
+<% end %>
