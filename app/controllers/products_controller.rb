@@ -6,10 +6,12 @@ class ProductsController < ApplicationController
     @products = Product.all
   end
 
+  #this loads the app/views/products/show.html.erb
   def show
     @product = Product.find(params[:id])
   end
 
+  #this loads the app/views/products/new.html.erb
   def new
   end
 
